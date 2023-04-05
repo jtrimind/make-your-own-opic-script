@@ -10,32 +10,20 @@ const topics = [
   { value: "topic2", label: "Topic 2" },
 ];
 
-const questionsData = {
-  topic1: [
-    {
-      id: "q1",
-      text: "Question 1 for Topic 1",
-      choices: ["Choice 1", "Choice 2", "Choice 3"],
-    },
-    // Add more questions for Topic 1
-  ],
-  topic2: [
-    {
-      id: "q1",
-      text: "Question 1 for Topic 2",
-      choices: ["Choice 1", "Choice 2", "Choice 3"],
-    },
-    // Add more questions for Topic 2
-  ],
+const loadQuestions = async (topicValue) => {
+  const response = await fetch(`/api/questions?topic=${topicValue}`);
+  const questions = await response.json();
+  return questions;
 };
 
 export default function Home() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [questions, setQuestions] = useState([]);
 
-  const handleTopicClick = (topic) => {
+  const handleTopicClick = async (topic) => {
     setSelectedTopic(topic);
-    setQuestions(questionsData[topic.value]);
+    const questions = await loadQuestions(topic.value);
+    setQuestions(questions);
   };
 
   const handleSubmit = (answers) => {
