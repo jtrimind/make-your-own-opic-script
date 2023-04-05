@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Question from './Question';
 
-const Quiz = ({ questions, handleSubmit }) => {
+const Survey = ({ questions, handleSubmit }) => {
   const [answers, setAnswers] = useState({});
 
   const handleChange = (event) => {
@@ -18,4 +18,4 @@ const Quiz = ({ questions, handleSubmit }) => {
   );
 };
 
-export default Quiz;
+export default Survey;

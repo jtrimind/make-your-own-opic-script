@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css";
 
 import React, { useState } from "react";
 import TopicSelect from "../components/TopicSelect";
-import Quiz from "../components/Quiz";
+import Survey from "../components/Survey";
 
 const topics = [
   { value: "topic1", label: "Topic 1" },
@@ -57,7 +57,7 @@ export default function Home() {
         {selectedTopic && (
           <div>
             <h2>{selectedTopic.label}</h2>
-            <Quiz questions={questions} handleSubmit={handleSubmit} />
+            <Survey questions={questions} handleSubmit={handleSubmit} />
           </div>
         )}
       </main>
