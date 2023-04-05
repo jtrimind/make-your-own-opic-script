@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 
 import React, { useState } from "react";
-import TopicSelect from "../components/TopicSelect";
+import TopicButtons from "../components/TopicButtons";
 import Survey from "../components/Survey";
 
 const topics = [
@@ -33,7 +33,7 @@ export default function Home() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [questions, setQuestions] = useState([]);
 
-  const handleTopicChange = (topic) => {
+  const handleTopicClick = (topic) => {
     setSelectedTopic(topic);
     setQuestions(questionsData[topic.value]);
   };
@@ -53,7 +53,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1>Select a Topic</h1>
-        <TopicSelect topics={topics} handleChange={handleTopicChange} />
+        <TopicButtons topics={topics} handleTopicClick={handleTopicClick} />
         {selectedTopic && (
           <div>
             <h2>{selectedTopic.label}</h2>
