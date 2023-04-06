@@ -19,6 +19,7 @@ const loadQuestions = async (topicValue) => {
 export default function Home() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const [generatedAnthology, setGeneratedAnthology] = useState(null);
 
   const handleTopicClick = async (topic) => {
     setSelectedTopic(topic);
@@ -26,9 +27,17 @@ export default function Home() {
     setQuestions(questions);
   };
 
-  const handleSubmit = (answers) => {
+  const handleSubmit = async (answers) => {
     console.log("Submitted answers:", answers);
-    // Implement your logic to handle the submitted answers
+    const response = await fetch('/api/generateAnthology', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(answers),
+    });
+    const anthology = await response.json();
+    setGeneratedAnthology(anthology);
   };
 
   return (
@@ -46,6 +55,12 @@ export default function Home() {
           <div>
             <h2>{selectedTopic.label}</h2>
             <Survey questions={questions} handleSubmit={handleSubmit} />
+          </div>
+        )}
+        {generatedAnthology && (
+          <div>
+            <h3>Generated Anthology:</h3>
+            <p>{generatedAnthology}</p>
           </div>
         )}
       </main>
