@@ -29,10 +29,10 @@ export default function Home() {
 
   const handleSubmit = async (answers) => {
     console.log("Submitted answers:", answers);
-    const response = await fetch('/api/generateAnthology', {
-      method: 'POST',
+    const response = await fetch("/api/generateAnthology", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(answers),
     });
@@ -50,7 +50,11 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1>Select a Topic</h1>
-        <TopicButtons topics={topics} handleTopicClick={handleTopicClick} />
+        <TopicButtons
+          topics={topics}
+          handleTopicClick={handleTopicClick}
+          activeTopic={selectedTopic}
+        />
         {selectedTopic && (
           <div>
             <h2>{selectedTopic.label}</h2>
