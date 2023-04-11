@@ -1,40 +1,40 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import TopicButtons from "../components/TopicButtons";
-import SubtopicButtons from '../components/SubtopicButtons';
+import SubtopicButtons from "../components/SubtopicButtons";
 import Survey from "../components/Survey";
 
-const topics = [
-  {
-    value: "topic1",
-    label: "Topic 1",
-    subtopics: [
-      {
-        value: "subtopic1-1",
-        label: "subtopic 1-1",
-      },
-      {
-        value: "subtopic1-2",
-        label: "Subtopic 1-2",
-      },
-    ],
-  },
-  { value: "topic2", label: "Topic 2" },
-];
+const fetchTopicsAndSubtopics = async () => {
+  const response = await fetch("/api/topicList");
+  const topicsAndSubtopics = await response.json();
+  return topicsAndSubtopics;
+};
 
 const loadQuestions = async (topicValue, subtopicValue) => {
-  const response = await fetch(`/api/questions?topic=${topicValue}&subtopic=${subtopicValue}`);
+  const response = await fetch(
+    `/api/questions?topic=${topicValue}&subtopic=${subtopicValue}`
+  );
   const questions = await response.json();
   return questions;
 };
 
 export default function Home() {
+  const [topicsAndSubtopics, setTopicsAndSubtopics] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [selectedSubtopic, setSelectedSubtopic] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [generatedAnthology, setGeneratedAnthology] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchTopicsAndSubtopics();
+      setTopicsAndSubtopics(data);
+    };
+
+    fetchData();
+  }, []);
 
   const handleTopicClick = async (topic) => {
     setSelectedTopic(topic);
@@ -69,7 +69,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1>Select a Topic</h1>
         <TopicButtons
-          topics={topics}
+          topics={topicsAndSubtopics}
           handleTopicClick={handleTopicClick}
           activeTopic={selectedTopic}
         />
