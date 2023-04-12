@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "question": "좋아하는 영화 장르",
+    "options": [
+      "Action",
+      "Comedy",
+      "Drama",
+      "Horror",
+      "Romance",
+      "Science fiction",
+      "Thriller",
+      "Documentary",
+      "Animated"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "해당 장르를 좋아하는 이유",
+    "options": [
+      "Entertainment",
+      "Storytelling",
+      "Escapism",
+      "Social bonding",
+      "Education"
+    ]
+  }
+]

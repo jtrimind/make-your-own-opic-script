@@ -24,9 +24,15 @@ const ScriptGenerator = ({ topic, subtopic }) => {
   }, [topic, subtopic]);
 
   const handleOptionChange = (questionId, selectedOption) => {
-    setAnswers({
-      ...answers,
-      [questionId]: selectedOption,
+    setAnswers((prevAnswers) => {
+      const currentAnswers = prevAnswers[questionId] || [];
+      const updatedAnswers = currentAnswers.includes(selectedOption)
+        ? currentAnswers.filter((option) => option !== selectedOption)
+        : [...currentAnswers, selectedOption];
+      return {
+        ...prevAnswers,
+        [questionId]: updatedAnswers,
+      };
     });
   };
 
@@ -61,7 +67,7 @@ const ScriptGenerator = ({ topic, subtopic }) => {
             {questionObj.options.map((option, idx) => (
               <label key={idx}>
                 <input
-                  type="radio"
+                  type="checkbox"
                   name={`question-${questionObj.id}`}
                   value={option}
                   onChange={() => handleOptionChange(questionObj.id, option)}
