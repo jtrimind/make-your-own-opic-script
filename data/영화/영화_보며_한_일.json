@@ -1,11 +1,28 @@
 [
     {
-        "id": "q1",
-        "text": "Question 1 for subtopic1-2",
-        "choices": [
-            "Choice 1",
-            "Choice 2",
-            "Choice 3"
+        "id": 1,
+        "question": "영화를 보기 전에 한 일",
+        "options": [
+            "Research the movie",
+            "Buy snacks or drinks",
+            "Choose the movie",
+            "Check showtimes",
+            "Settle in",
+            "Use the restroom",
+            "Turn off your phone"
+        ]
+    },
+    {
+        "id": 2,
+        "question": "영화를 보고 나서 한 일",
+        "options": [
+            "Discuss the movie with others",
+            "Research the movie",
+            "Watch more movies",
+            "Reflect on the movie",
+            "Write a review",
+            "Go out for a meal or drinks",
+            "Move on to other activities"
         ]
     }
 ]
